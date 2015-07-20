@@ -88,6 +88,7 @@ my $mapping = [
     ['LINEV',       '3.2.1.0',  ASN_GAUGE],         # upsAdvInputLineVoltage
     ['LINEFREQ',    '3.2.4.0',  ASN_GAUGE],         # upsAdvInputFrequency
     ['LASTXFER',    '3.2.5.0',  ASN_INTEGER],       # upsAdvInputLineFailCause
+    ['STATUS',      '4.1.1.0',  ASN_OCTET_STR],     # upsBasicOutputStatus
     ['OUTPUTV',     '4.2.1.0',  ASN_GAUGE],         # upsAdvOutputVoltage
     ['LOADPCT',     '4.2.3.0',  ASN_GAUGE],         # upsAdvOutputLoad
     ['NOMOUTV',     '5.2.1.0',  ASN_INTEGER],       # upsAdvConfigRatedOutputVoltage
@@ -155,10 +156,10 @@ my %enums = (
         'Forced by software'                => undef,
         'Input frequency out of range'      => undef,
         'UNKNOWN EVENT'                     => undef
-    }
+    },
 );
 
-# TODO upsBasicBatteryStatus, upsBasicOutputStatus, NOMPOWER
+# TODO upsBasicBatteryStatus, NOMPOWER
 
 
 
