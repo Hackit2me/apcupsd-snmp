@@ -277,22 +277,22 @@ sub convert_value {
 
     # Convert other values according to their data type in MIB
     if ($oid_type{$oid} == ASN_INTEGER) 
-	{
+    {
             return ($raw =~ /(\d+)/g)[0];
-        }
+    }
     elsif ($oid_type{$oid} == ASN_GAUGE) 
-	{
+    {
             return ($raw =~ /(\d+(?:\.\d+)?)/g)[0];
-        }
+    }
     elsif ($oid_type{$oid} == ASN_TIMETICKS) 
-	{
+    {
             my ($val, $unit) = ($raw =~ /(\d+(?:\.\d+)?)\s+(\w+)/g);
             return &convert_time($val, $unit);
-        }
+    }
     else
-        { 
+    {
             return $raw;
-        }
+    }
     
 }
 
@@ -356,18 +356,18 @@ sub snmp_handler {
 
         # Mode GETNEXT (for walking)
         } elsif ($request_info->getMode() == MODE_GETNEXT) {
-	    # Check if the request did not request the trailing .0, add it here
+            # Check if the request did not request the trailing .0, add it here
             if (exists($oid_chain{"$oid.0"})) {
-		# Then the next object in the MIB would be the one with the index
-		my $new_oid = "$oid.0";
+                # Then the next object in the MIB would be the one with the index
+                my $new_oid = "$oid.0";
                 my $value = $data{$new_oid};
 
                 print STDERR "  Returning next OID $new_oid: $value\n" if ($debugging);
                 $request->setOID($new_oid);
-		
+
                 $request->setValue($oid_type{$new_oid}, $value);
 
-	    # Check if the request DID include the trailing .0 index
+            # Check if the request DID include the trailing .0 index
             } elsif (exists($oid_chain{$oid})) {
                 my $next_oid = $oid_chain{$oid};
                 my $value = $data{$next_oid};
